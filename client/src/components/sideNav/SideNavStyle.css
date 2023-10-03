@@ -1,0 +1,75 @@
+.sideNav {
+  width: 250px;
+  position: fixed;
+  padding: 10px 0px 0px 0px;
+  height: 100%;
+  flex: 0 0 235px;
+  background-color: #2f4050;
+  top: 0;
+  left: 0px;
+  overflow-x: hidden;
+  transition: left 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.open {
+  left: 0px;
+}
+
+.close {
+  left: -250px;
+}
+
+.backToggleButton {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: auto; /* Push the button to the right */
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+}
+
+.backToggleButton:hover {
+  color: #007bff;
+  background-color: white;
+}
+
+.sideNavList {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.sideNavList .row {
+  text-decoration: none;
+  width: 100%;
+  height: 50px;
+  list-style-type: none;
+  margin: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  align-items: center;
+}
+
+.sideNavList .row:hover {
+  cursor: pointer;
+  background-color: #2f4090;
+}
+
+.sideNavList a.active {
+  background-color: #2f4090;
+}
+
+.row #icon {
+  flex: 2cm;
+  display: grid;
+  place-items: center;
+}
+
+.row #title {
+  flex: 90%;
+}
