@@ -1,47 +1,28 @@
+import AboutMe from "./aboutMe/AboutMe";
+import Project1 from "./projects/Project1";
+import Project2 from "./projects/Project2";
+import Carousel from "../../components/carousel/Carousel";
+
 import "./Home.css";
 
 function Home() {
+  const CarouselSections = [<AboutMe />, <Project1 />, <Project2 />];
   return (
     <div className="home">
       <header className="header">
         <h1>Welcome to My Portfolio</h1>
-        <p>Web Developer | Fullstack Developer | Application Developer </p>
+        <p>
+          Web Developer | Fullstack Developer | Application Developer | Data
+          Analyst Enthusiast
+        </p>
       </header>
-      <section className="about">
-        <h2>About Me</h2>
-        <p>
-          Hello! I'm [Your Name], a passionate web developer with expertise in
-          building modern and responsive web applications.
-        </p>
-        <p>
-          My goal is to create user-friendly and visually appealing websites
-          that make a positive impact on users. I'm proficient in HTML, CSS,
-          JavaScript, and various frontend frameworks like React.
-        </p>
-      </section>
-      <section className="projects">
-        <h2>Projects</h2>
-        <div className="project">
-          <h3>Project 1</h3>
-          <p>
-            Description of your project goes here. Highlight key features and
-            technologies used.
-          </p>
-        </div>
-        <div className="project">
-          <h3>Project 2</h3>
-          <p>
-            Description of your project goes here. Highlight key features and
-            technologies used.
-          </p>
-        </div>
-        {/* Add more project sections as needed */}
-      </section>
+      <Carousel items={CarouselSections} />
+      <br />
       <section className="contact">
         <h2>Contact Me</h2>
         <p>
           Feel free to get in touch with me. You can reach me at
-          [your_email@example.com].
+          takoaashish01@gmail.com.
         </p>
       </section>
     </div>

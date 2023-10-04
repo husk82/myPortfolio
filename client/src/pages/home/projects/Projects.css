@@ -1,0 +1,28 @@
+.projects {
+  background-color: #444;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  white-space: normal;
+}
+
+.projects h2 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.project {
+  margin-bottom: 15px;
+}
+
+.project h3 {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.project p {
+  font-size: 1rem;
+  color: #fff;
+}
