@@ -1,3 +1,19 @@
+@media all and (max-width: 2000px) and (min-width: 1200px) {
+  .home {
+    margin-left: 190px;
+    padding: 10px;
+    align-items: center;
+  }
+}
+
+@media all and (max-width: 3300px) and (min-width: 2200px) {
+  .home {
+    margin-left: 600px;
+    padding: 10px;
+    align-items: center;
+  }
+}
+
 .header {
   text-align: center;
   margin-bottom: 20px;

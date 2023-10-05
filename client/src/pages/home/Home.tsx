@@ -21,8 +21,9 @@ function Home() {
       <section className="contact">
         <h2>Contact Me</h2>
         <p>
-          Feel free to get in touch with me. You can reach me at
-          takoaashish01@gmail.com.
+          Feel free to get in touch with me. You can reach me at: <br />
+          Email: takoaashish01@gmail.com <br />
+          GitHub: https://github.com/husk82
         </p>
       </section>
     </div>

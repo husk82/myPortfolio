@@ -20,5 +20,5 @@ body {
 
 /* Apply a basic background color */
 body {
-  background-color: #333;
+  background: linear-gradient(45deg, #222, #777);
 }
