@@ -1,0 +1,43 @@
+@media all and (max-width: 2000px) and (min-width: 1200px) {
+  .board-container {
+    margin-left: 190px;
+    padding: 10px;
+    align-items: center;
+  }
+}
+
+@media all and (max-width: 3300px) and (min-width: 2200px) {
+  .board-container {
+    margin-left: 600px;
+    padding: 10px;
+    align-items: center;
+  }
+}
+
+.board {
+  margin: 30px;
+  outline: 2px solid rgb(134, 154, 189);
+}
+
+.row {
+  height: 35px;
+}
+
+.cell {
+  width: 35px;
+  height: 35px;
+  outline: 1px solid rgb(134, 154, 189);
+  display: inline-block;
+}
+
+.cell-green {
+  background-color: green;
+}
+
+.cell-red {
+  background-color: rgb(226, 74, 74);
+}
+
+.cell-purple {
+  background-color: purple;
+}
