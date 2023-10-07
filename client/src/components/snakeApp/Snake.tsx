@@ -40,6 +40,7 @@ const Snake: React.FC = () => {
   secondNode.next = thirdNode;
 
   const [board, setBoard] = useState(createBoard(BOARD_SIZE));
+  const [foodCell, setFoodCell] = useState(getRandomFoodCell());
   const [snakeCells, setSnakeCells] = useState(new Set([112, 111, 110]));
   const [snake, setSnake] = useState(initialSnake);
   const [direction, setDirection] = useState<Direction>(Direction.RIGHT);
@@ -66,11 +67,12 @@ const Snake: React.FC = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
+    window.addEventListener("keydown", (e) => {
+      handleKeyPress(e);
+    });
+    return window.removeEventListener("keydown", (e) => {
+      handleKeyPress(e);
+    });
   }, []);
 
   // Moving snake
@@ -117,14 +119,24 @@ const Snake: React.FC = () => {
       return;
     }
 
-    const oldTailValue = getAndRemoveLastNodeValue(snake);
+    if (newHeadValue === foodCell) {
+      const newHead = new LinkedListNode(newHeadValue);
+      newHead.next = snake.head;
+      snake.head = newHead;
 
-    const newHead = new LinkedListNode(newHeadValue);
-    newHead.next = snake.head;
-    snake.head = newHead;
+      snakeCells.add(newHeadValue);
 
-    snakeCells.add(newHeadValue);
-    snakeCells.delete(oldTailValue!);
+      setFoodCell(getRandomFoodCell());
+    } else {
+      const oldTailValue = getAndRemoveLastNodeValue(snake);
+
+      const newHead = new LinkedListNode(newHeadValue);
+      newHead.next = snake.head;
+      snake.head = newHead;
+
+      snakeCells.add(newHeadValue);
+      snakeCells.delete(oldTailValue!);
+    }
 
     setSnakeCells(new Set(snakeCells));
     setSnake(snake);
@@ -171,14 +183,14 @@ const Snake: React.FC = () => {
       <div className="board">
         {board.map((row, rowIdx) => (
           <div key={rowIdx} className="row">
-            {row.map((cellValue, cellIdx) => (
-              <div
-                key={cellIdx}
-                className={`cell ${
-                  snakeCells.has(cellValue) ? "cell-green" : ""
-                }`}
-              ></div>
-            ))}
+            {row.map((cellValue, cellIdx) => {
+              const className = getCellClassName(
+                cellValue,
+                foodCell,
+                snakeCells
+              );
+              return <div key={cellIdx} className={className}></div>;
+            })}
           </div>
         ))}
       </div>
@@ -198,6 +210,34 @@ const createBoard = (BOARD_SIZE: number) => {
     board.push(currentRow);
   }
   return board;
+};
+
+const getCellClassName = (
+  cellValue: number,
+  foodCell: number,
+  snakeCells: Set<number>
+) => {
+  let className = "cell";
+  const isFoodCell = cellValue === foodCell;
+  const isSnakeCell = snakeCells.has(cellValue);
+
+  if (isFoodCell) {
+    className = "cell cell-red";
+  }
+  if (isSnakeCell) {
+    className = "cell cell-green";
+  }
+  if (isFoodCell && isSnakeCell) {
+    className = "cell cell-purple";
+  }
+
+  return className;
+};
+
+const getRandomFoodCell = (): number => {
+  const min = 1;
+  const max = BOARD_SIZE * BOARD_SIZE;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 export default Snake;
