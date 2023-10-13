@@ -48,10 +48,16 @@ const Snake: React.FC = () => {
   const [snakeHead, setSnakeHead] = useState<number>(112);
   const [direction, setDirection] = useState<Direction | "">(Direction.RIGHT);
   const [isRunning, setIsRunning] = useState<boolean>(true);
+  const [lastDirection, setLastDirection] = useState<Direction | "">(
+    Direction.RIGHT
+  );
 
   // Hanlding key press
   const handleKeyPress = (e: KeyboardEvent) => {
     const newDirection = getDirectionFromKey(e.key);
+    if (isOppositeDirection(newDirection, lastDirection)) {
+      return;
+    }
     setDirection(newDirection);
   };
 
@@ -65,7 +71,7 @@ const Snake: React.FC = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [lastDirection]);
 
   // Moving snake
   useEffect(() => {
@@ -95,6 +101,8 @@ const Snake: React.FC = () => {
     } else {
       newHeadValue = snake.head!.value + BOARD_SIZE;
     }
+
+    setLastDirection(direction);
 
     const newRow = Math.floor((newHeadValue - 1) / BOARD_SIZE);
     const newCol = (newHeadValue - 1) % BOARD_SIZE;
@@ -253,6 +261,18 @@ const getDirectionFromKey = (key: String) => {
     default:
       return "";
   }
+};
+
+const isOppositeDirection = (
+  newDirection: Direction | "",
+  lastDirection: Direction | ""
+) => {
+  return (
+    (newDirection === Direction.UP && lastDirection === Direction.DOWN) ||
+    (newDirection === Direction.DOWN && lastDirection === Direction.UP) ||
+    (newDirection === Direction.LEFT && lastDirection === Direction.RIGHT) ||
+    (newDirection === Direction.RIGHT && lastDirection === Direction.LEFT)
+  );
 };
 
 export default Snake;
