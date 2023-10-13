@@ -39,40 +39,32 @@ const Snake: React.FC = () => {
   initialSnake.head!.next = secondNode;
   secondNode.next = thirdNode;
 
-  const [board, setBoard] = useState(createBoard(BOARD_SIZE));
+  const [board] = useState(createBoard(BOARD_SIZE));
   const [foodCell, setFoodCell] = useState(getRandomFoodCell());
-  const [snakeCells, setSnakeCells] = useState(new Set([112, 111, 110]));
-  const [snake, setSnake] = useState(initialSnake);
-  const [direction, setDirection] = useState<Direction>(Direction.RIGHT);
+  const [snakeCells, setSnakeCells] = useState<Set<number>>(
+    new Set([112, 111, 110])
+  );
+  const [snake, setSnake] = useState<SinglyLinkedList<number>>(initialSnake);
+  const [snakeHead, setSnakeHead] = useState<number>(112);
+  const [direction, setDirection] = useState<Direction | "">(Direction.RIGHT);
   const [isRunning, setIsRunning] = useState<boolean>(true);
 
   // Hanlding key press
   const handleKeyPress = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case "ArrowUp":
-        setDirection(Direction.UP);
-        break;
-      case "ArrowRight":
-        setDirection(Direction.RIGHT);
-        break;
-      case "ArrowDown":
-        setDirection(Direction.DOWN);
-        break;
-      case "ArrowLeft":
-        setDirection(Direction.LEFT);
-        break;
-      default:
-        break;
-    }
+    const newDirection = getDirectionFromKey(e.key);
+    setDirection(newDirection);
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       handleKeyPress(e);
-    });
-    return window.removeEventListener("keydown", (e) => {
-      handleKeyPress(e);
-    });
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   // Moving snake
@@ -118,6 +110,8 @@ const Snake: React.FC = () => {
       handleCollision();
       return;
     }
+
+    setSnakeHead(newHeadValue);
 
     if (newHeadValue === foodCell) {
       const newHead = new LinkedListNode(newHeadValue);
@@ -187,7 +181,8 @@ const Snake: React.FC = () => {
               const className = getCellClassName(
                 cellValue,
                 foodCell,
-                snakeCells
+                snakeCells,
+                snakeHead
               );
               return <div key={cellIdx} className={className}></div>;
             })}
@@ -215,17 +210,22 @@ const createBoard = (BOARD_SIZE: number) => {
 const getCellClassName = (
   cellValue: number,
   foodCell: number,
-  snakeCells: Set<number>
+  snakeCells: Set<number>,
+  snakeHead: number
 ) => {
   let className = "cell";
   const isFoodCell = cellValue === foodCell;
   const isSnakeCell = snakeCells.has(cellValue);
+  const isSnakeHead = snakeHead === cellValue;
 
   if (isFoodCell) {
     className = "cell cell-red";
   }
   if (isSnakeCell) {
     className = "cell cell-green";
+  }
+  if (isSnakeHead) {
+    className = "cell cell-dark-green";
   }
   if (isFoodCell && isSnakeCell) {
     className = "cell cell-purple";
@@ -238,6 +238,21 @@ const getRandomFoodCell = (): number => {
   const min = 1;
   const max = BOARD_SIZE * BOARD_SIZE;
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const getDirectionFromKey = (key: String) => {
+  switch (key) {
+    case "ArrowUp":
+      return Direction.UP;
+    case "ArrowRight":
+      return Direction.RIGHT;
+    case "ArrowDown":
+      return Direction.DOWN;
+    case "ArrowLeft":
+      return Direction.LEFT;
+    default:
+      return "";
+  }
 };
 
 export default Snake;

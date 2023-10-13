@@ -34,6 +34,10 @@
   background-color: green;
 }
 
+.cell-dark-green {
+  background-color: darkgreen;
+}
+
 .cell-red {
   background-color: rgb(226, 74, 74);
 }
