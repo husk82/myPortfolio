@@ -11,7 +11,16 @@ export const SideNavData = [
   {
     title: "Apps",
     icon: <AppsIcon />,
-    link: "/apps",
+    subMenu: [
+      {
+        title: "Snake",
+        link: "/apps/snake",
+      },
+      {
+        title: "Video Downloader",
+        link: "/apps/videodownloader",
+      },
+    ],
   },
   {
     title: "Setting",

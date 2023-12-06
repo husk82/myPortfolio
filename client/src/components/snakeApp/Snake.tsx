@@ -47,10 +47,13 @@ const Snake: React.FC = () => {
   const [snake, setSnake] = useState<SinglyLinkedList<number>>(initialSnake);
   const [snakeHead, setSnakeHead] = useState<number>(112);
   const [direction, setDirection] = useState<Direction | "">(Direction.RIGHT);
-  const [isRunning, setIsRunning] = useState<boolean>(true);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [lastDirection, setLastDirection] = useState<Direction | "">(
     Direction.RIGHT
   );
+
+  const buttonText = isRunning ? "Stop" : "Start";
 
   // Hanlding key press
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -175,29 +178,52 @@ const Snake: React.FC = () => {
   // Stop
   const handleStopClick = () => {
     setIsRunning(!isRunning);
+    if (isGameOver) {
+      setIsGameOver(false);
+    }
   };
   const handleCollision = () => {
     setIsRunning(false);
+    setIsGameOver(true);
   };
 
+  const handleRestartClick = () => {
+    setIsRunning(true);
+    setIsGameOver(false);
+    setSnakeCells(new Set([112, 111, 110]));
+    setSnake(initialSnake);
+    setSnakeHead(112);
+    setDirection(Direction.RIGHT);
+    setLastDirection(Direction.RIGHT);
+    setFoodCell(getRandomFoodCell());
+  }
+
   return (
-    <div className="board-container">
-      <div className="board">
-        {board.map((row, rowIdx) => (
-          <div key={rowIdx} className="row">
-            {row.map((cellValue, cellIdx) => {
-              const className = getCellClassName(
-                cellValue,
-                foodCell,
-                snakeCells,
-                snakeHead
-              );
-              return <div key={cellIdx} className={className}></div>;
-            })}
-          </div>
-        ))}
+    <div>
+      <div className="heading-name">Welcome to Snake Game!</div>
+      <div className="board-container">   
+        <div className="board">
+          {board.map((row, rowIdx) => (
+            <div key={rowIdx} className="row">
+              {row.map((cellValue, cellIdx) => {
+                const className = getCellClassName(
+                  cellValue,
+                  foodCell,
+                  snakeCells,
+                  snakeHead
+                );
+                return <div key={cellIdx} className={className}></div>;
+              })}
+            </div>
+          ))}
+          {isGameOver && <div className="game-over-message"> Game Over!</div>}
+        </div>
+        {isGameOver ? (
+          <button className="restart-button" onClick={handleRestartClick}>Restart</button>
+        ) : (
+          <button className="play-button" onClick={handleStopClick}>{buttonText}</button>
+        )}
       </div>
-      <button onClick={handleStopClick}>Stop</button>
     </div>
   );
 };

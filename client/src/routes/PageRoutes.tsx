@@ -7,7 +7,7 @@ function PageRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/apps" element={<Apps />} />
+      <Route path="/apps/*" element={<Apps />} />
       <Route path="/setting" element={<Setting />} />
     </Routes>
   );

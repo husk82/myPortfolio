@@ -1,17 +1,7 @@
-@media all and (max-width: 2000px) and (min-width: 1200px) {
-  .board-container {
-    margin-left: 190px;
-    padding: 10px;
-    align-items: center;
-  }
-}
 
-@media all and (max-width: 3300px) and (min-width: 2200px) {
-  .board-container {
-    margin-left: 600px;
-    padding: 10px;
-    align-items: center;
-  }
+.board-container {
+  position: relative;
+  padding: 10px;
 }
 
 .board {
@@ -44,4 +34,79 @@
 
 .cell-purple {
   background-color: purple;
+}
+
+.play-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.restart-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(242, 56, 87);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.play-button:hover {
+  background-color: #2980b9;
+}
+
+.game-over-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: red;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.heading-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f2efef;
+}
+
+/* Media Queries */
+
+@media all and (max-width: 2000px) and (min-width: 1200px),
+       all and (max-width: 3300px) and (min-width: 2200px) {
+  .board-container {
+    margin-left: 200px;
+    align-items: center;
+  }
+
+  .play-button, .restart-button {
+    margin-left: 240px;
+  }
+
+  .heading-name {
+    margin-left: 240px;
+  }
+
+  @media all and (max-width: 3300px) and (min-width: 2200px) {
+    .board-container {
+      margin-left: 600px;
+    }
+
+    .heading-name {
+      margin-left: 640px;
+    }
+  }
 }
