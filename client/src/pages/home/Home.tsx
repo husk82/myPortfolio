@@ -22,8 +22,8 @@ function Home() {
         <h2>Contact Me</h2>
         <p>
           Feel free to get in touch with me. You can reach me at: <br />
-          Email: takoaashish01@gmail.com <br />
-          GitHub: https://github.com/husk82
+          Email:<a href="mailto:takoaashish01@gmail.com">takoaashish01@gmail.com</a><br />
+          GitHub: <a href="https://github.com/husk82"> https://github.com/husk82 </a><br />
         </p>
       </section>
     </div>

@@ -47,3 +47,12 @@
   font-size: 1rem;
   color: #fff;
 }
+
+a {
+  color: #ffa500; /* Orange text color for unvisited links */
+  text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+  color: #ff8c00; /* Darker orange for hover effect */
+}

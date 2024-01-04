@@ -1,0 +1,58 @@
+.youtube-downloader-container {
+  max-width: 500px;
+}
+
+h1 {
+  color: #fd912c;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #e39b2e;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.download-status {
+  margin-top: 20px;
+  color: #27ae60;
+}
+
+/* Media Queries */
+
+@media all and (max-width: 2000px) and (min-width: 1200px),
+       all and (max-width: 3300px) and (min-width: 2200px) {
+    .youtube-downloader-container{
+    margin-left: 200px;
+    align-items: center;
+  }
+
+
+
+  @media all and (max-width: 3300px) and (min-width: 2200px) {
+    .youtube-downloader-container {
+      margin-left: 600px;
+    }
+
+  }
+}

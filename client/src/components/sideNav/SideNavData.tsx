@@ -17,8 +17,8 @@ export const SideNavData = [
         link: "/apps/snake",
       },
       {
-        title: "Video Downloader",
-        link: "/apps/videodownloader",
+        title: "YoutubeDownloader",
+        link: "/apps/youtubeDownloader",
       },
     ],
   },
