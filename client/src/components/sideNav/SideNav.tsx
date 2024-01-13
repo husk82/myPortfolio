@@ -6,18 +6,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import "./SideNavStyle.css";
 
-interface SubMenuItem {
-  title: string;
-  link: string;
-}
-
-interface MenuItem {
-  tilte: string;
-  icon: React.ReactNode;
-  link?: string;
-  subMenu?: SubMenuItem[];
-}
-
 interface SideNavProps {
   isOpen: boolean;
   toggleSideNav: () => void;
@@ -46,12 +34,13 @@ function SideNav(props: SideNavProps) {
                   onClick={() => toggleSubMenu(menuItem.title)}
                 >
                   <div id="icon">{menuItem.icon}</div>
-                  <div id="title">{menuItem.title}</div>
+                  <div id="title">{menuItem.title}
                   {openSubMenu === menuItem.title ? (
                     <ExpandLessIcon />
                   ) : (
                     <ExpandMoreIcon />
                   )}
+                  </div>
                 </div>
               ) : (
                 <NavLink to={menuItem.link || "/"} className="row">

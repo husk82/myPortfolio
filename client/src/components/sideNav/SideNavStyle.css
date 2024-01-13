@@ -71,9 +71,12 @@
 }
 
 .row #title {
+  display: flex; 
   flex: 90%;
+  align-items: center; 
+  gap: 120px;
 }
 
 .subMenuList {
-  padding-left: 20px;
+  padding-left: 5px;
 }

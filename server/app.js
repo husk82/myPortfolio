@@ -1,7 +1,13 @@
-const express = require('express');
-const ytdl = require('ytdl-core');
+import express from 'express';
+import ytdl from 'ytdl-core';
+import cors from 'cors';
+
 const app = express();
 const port = 3000;
+
+// Middleware
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello, Server is running!!');
@@ -10,8 +16,6 @@ app.get('/', (req, res) => {
 app.post('/api/download', async (req, res) => {
   try {
     const { youtubeUrl } = req.body;
-    console.log("Executed");
-    console.log(youtubeUrl);
 
     if (!ytdl.validateURL(youtubeUrl)) {
       return res.status(400).json({ error: 'Invalid YouTube URL' });
