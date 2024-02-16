@@ -22,7 +22,7 @@ app.post('/api/download', async (req, res) => {
     }
 
     const info = await ytdl.getInfo(youtubeUrl);
-    const videoFormat = ytdl.chooseFormat(info.formats, { quality: 'highest' });
+    const videoFormat = ytdl.chooseFormat(info.formats, { quality: '248' });
 
     res.header('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp4"`);
     ytdl(youtubeUrl, { format: videoFormat }).pipe(res);

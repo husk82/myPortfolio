@@ -4,13 +4,16 @@ import "./youtubeDownloader.css";
 function YoutubeDownloader() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [downloadStatus, setDownloadStatus] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const handleUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
 
   const handleDownloadClick = async () => {
+    setDownloadStatus("Ma");
     try {
+      setLoading(true);
       // Make an API call to the backend with the YouTube URL
       const response = await fetch("http://localhost:3000/api/download", {
         method: "POST",
@@ -32,7 +35,7 @@ function YoutubeDownloader() {
         let filename = "download.mp4";
         if (contentDisposition) {
           const matches = /filename="([^"]+)"/.exec(contentDisposition);
-          if (matches.length > 1) filename = matches[1];
+          if (matches && matches.length > 1) filename = matches[1];
         }
         a.download = filename;
 
@@ -50,6 +53,8 @@ function YoutubeDownloader() {
     } catch (error) {
       console.error("Error making API call:", error);
       setDownloadStatus("An error occurred while making the API call.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,6 +70,7 @@ function YoutubeDownloader() {
         placeholder="https://www.youtube.com/watch?v=your-video-id"
       />
       <button onClick={handleDownloadClick}>Download</button>
+      {isLoading && <div className="spinner"> </div>}
       {downloadStatus && <p>{downloadStatus}</p>}
     </div>
   );
