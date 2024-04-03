@@ -56,3 +56,22 @@ a {
 a:hover {
   color: #ff8c00; /* Darker orange for hover effect */
 }
+
+.header button {
+  background: black; /* Base background color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header button:hover {
+  background: rgb(255, 255, 255);
+  color: black;
+}
+
+

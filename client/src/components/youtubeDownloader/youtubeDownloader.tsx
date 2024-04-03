@@ -11,7 +11,7 @@ function YoutubeDownloader() {
   };
 
   const handleDownloadClick = async () => {
-    setDownloadStatus("Ma");
+    setDownloadStatus("Loading..");
     try {
       setLoading(true);
       // Make an API call to the backend with the YouTube URL

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import AboutMe from "./aboutMe/AboutMe";
 import Project1 from "./projects/Project1";
 import Project2 from "./projects/Project2";
@@ -6,6 +7,7 @@ import Carousel from "../../components/carousel/Carousel";
 import "./Home.css";
 
 function Home() {
+  const navigate = useNavigate();
   const CarouselSections = [<AboutMe />, <Project1 />, <Project2 />];
   return (
     <div className="home">
@@ -14,7 +16,10 @@ function Home() {
         <p>
           Web Developer | Fullstack Developer | Application Developer | Data
           Analyst Enthusiast
-        </p>
+        </p><br/>
+        {/* TODO: Re-enable this button once the 3D space is ready
+        <button onClick={() => navigate('/3dspace')}>GO TO MY 3D SPACE</button>
+        */}
       </header>
       <Carousel items={CarouselSections} />
       <br />
