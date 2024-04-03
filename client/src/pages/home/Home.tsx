@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import AboutMe from "./aboutMe/AboutMe";
 import Project1 from "./projects/Project1";
 import Project2 from "./projects/Project2";
@@ -7,7 +6,6 @@ import Carousel from "../../components/carousel/Carousel";
 import "./Home.css";
 
 function Home() {
-  const navigate = useNavigate();
   const CarouselSections = [<AboutMe />, <Project1 />, <Project2 />];
   return (
     <div className="home">
